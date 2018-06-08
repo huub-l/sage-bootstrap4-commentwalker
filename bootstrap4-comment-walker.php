@@ -42,11 +42,11 @@ class bootstrap_comment_walker extends \Walker_Comment
 
         <div class="media-body">
             <?php printf( '<h4 class="media-heading">%s</h4>', get_comment_author_link() ); ?>
-                <a class="comment-metadata" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
-                    <time datetime="<?php comment_time( 'c' ); ?>">
-                        <?php printf( _x( '%1$s at %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
-                    </time>
-                </a><!-- .comment-metadata -->
+            <a class="comment-metadata" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
+                <time datetime="<?php comment_time( 'c' ); ?>">
+                    <?php printf( _x( '%1$s at %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
+                </time>
+            </a><!-- .comment-metadata -->
             <?php if ( '0' == $comment->comment_approved ) : ?>
                 <p class="comment-awaiting-moderation label label-info"><?php _e( 'Your comment is awaiting moderation.' ); ?></p>
             <?php endif; ?>
