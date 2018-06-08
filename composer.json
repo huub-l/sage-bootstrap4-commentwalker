@@ -1,0 +1,19 @@
+{
+  "name": "jcjdamen/sage-bootstrap4-commentwalker",
+  "description": "Bootstrap 4 Media Object component navwalker for Sage 9 based themes",
+  "keywords": ["wordpress", "bootstrap 4", "commentwalker", "comments"],
+  "homepage": "https://github.com/jcjdamen/sage-bootstrap4-commentwalker",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jelle Damen",
+      "email": "info@jelledamen.nl"
+		}
+  ],
+  "require": {
+    "php": ">=5.3.2"
+  },
+	"autoload": {
+    "files": ["bootstrap4-comment-walker.php"]
+  }
+}
