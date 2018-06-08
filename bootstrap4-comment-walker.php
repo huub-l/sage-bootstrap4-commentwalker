@@ -29,43 +29,45 @@ class bootstrap_comment_walker extends \Walker_Comment
      * @param int $depth Depth of comment.
      * @param array $args An array of arguments.
      */
-    protected function html5_comment( $comment, $depth, $args ) {
-        $tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+    protected function html5_comment($comment, $depth, $args) {
+        $tag = ($args['style'] === 'div') ? 'div' : 'li';
         ?>
-        <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent media' : 'media' ); ?>>
+        <<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class($this->has_children ? 'has-children media' : ' media'); ?>>
 
         <?php if ( 0 != $args['avatar_size'] ): ?>
-            <a href="<?php echo get_comment_author_url(); ?>" class="media-avatar">
+            <a href="<?php echo get_comment_author_url(); ?>">
                 <?php echo get_avatar( $comment, $args['avatar_size'] ); ?>
             </a>
         <?php endif; ?>
 
         <div class="media-body">
-            <?php printf( '<h4 class="media-heading">%s</h4>', get_comment_author_link() ); ?>
-            <a class="comment-metadata" href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
-                <time datetime="<?php comment_time( 'c' ); ?>">
-                    <?php printf( _x( '%1$s at %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
-                </time>
-            </a><!-- .comment-metadata -->
+        <article id="comment-<?php comment_ID(); ?>">
+
+            <h5><?php _e('By'); ?>&nbsp;<?php echo get_comment_author_link(); ?>&nbsp;<?php _e('on'); ?>
+                <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>"
+                   datetime="<?php comment_time('c'); ?>"><?php comment_date(); ?>
+                </a>
+            </h5>
+
             <?php if ( '0' == $comment->comment_approved ) : ?>
                 <p class="comment-awaiting-moderation label label-info"><?php _e( 'Your comment is awaiting moderation.' ); ?></p>
             <?php endif; ?>
-            <div class="comment-content">
-                <?php comment_text(); ?>
-            </div><!-- .comment-content -->
+
+            <?php comment_text(); ?>
+
             <ul class="list-inline">
-                <?php edit_comment_link( __( 'Edit' ), '<li class="edit-link">', '</li>' ); ?>
+                <?php edit_comment_link(__('Edit'), '<li class="edit-link list-inline-item chip">', '</li>'); ?>
                 <?php
-                comment_reply_link( array_merge( $args, array(
+                comment_reply_link(array_merge($args, array(
                     'add_below' => 'div-comment',
                     'depth'     => $depth,
                     'max_depth' => $args['max_depth'],
-                    'before'    => '<li class="reply-link">',
+                    'before'    => '<li class=" reply-link list-inline-item chip">',
                     'after'     => '</li>'
-                ) ) );
+                )));
                 ?>
             </ul>
-        </div>
+        </article>
         <?php
     }
 }
